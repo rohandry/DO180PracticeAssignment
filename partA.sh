@@ -26,7 +26,7 @@ echo "Creating bogus images"
 #
 ###### Create a container with some changes made to it
 #echo "Creating changes image and container"
-#podman build -t practiceimage assignmentFiles/basicContainer/
+podman build -t practiceimage assignmentFiles/basicContainer/
 #podman run --name practiceContainer -d localhost/practiceimage
 #
 #echo "Making changes"
@@ -42,5 +42,18 @@ echo "Creating bogus images"
 #done
 
 ###### Debug a boken container
+echo "Creating broken Container"
 podman run -d --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWRD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -p 30306:3306 docker.io/bitnami/mysql
 echo "podman run -d --name devsql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWRD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -p 30306:3306 docker.io/bitnami/mysql" > devSqlLaunch.sh
+
+##### Customize a container
+echo "Creating container for customisation" 
+podman run --name samEnvironment -d localhost/practiceimage
+mkdir files
+mkdir files/data 
+for FILE in salesdata.xml userreport.pdf
+do
+	touch files/${FILE}
+	touch files/data/${FILE}
+done
+

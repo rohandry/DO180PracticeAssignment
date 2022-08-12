@@ -1,5 +1,4 @@
 #!/bin/bash
-mkdir assignmentFiles
 
 ###### Create a mess of containers and images
 

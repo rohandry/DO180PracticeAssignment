@@ -1,0 +1,17 @@
+FROM ubi8/ubi:8.5
+LABEL version="1.0"
+LABEL description="This is a custom httpd container image"
+LABEL creationDate="12-8-2022"
+MAINTAINER Alan Shepard <sheppyboi95@hotmail.com>
+RUN echo "Begining image build"
+RUN yum update -y
+RUN yum install -y httpd
+EXPOSE 80
+ENV LogLevel "info"
+COPY janreport.xls /var/www/html 
+COPY febreport.xls /var/www/html 
+COPY toRedHatter3.txt /var/www/html 
+COPY dataArchive.tar /var/www/html 
+USER apache
+ENTRYPOINT /usr/sbin/httpd
+CMD -D FOREGROUND

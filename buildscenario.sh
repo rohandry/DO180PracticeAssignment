@@ -51,6 +51,7 @@ then
 	oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
 #Project exists
 else
+	oc project test-project
 	oc get pods | grep mytest 
 	#App does not exist
 	if (( $? == 1 ))

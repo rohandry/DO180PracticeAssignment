@@ -29,7 +29,7 @@ echo "Making changes"
 echo "im so friggen board" > generatedFiles/alansDocs/hardWork.txt
 podman cp  generatedFiles/alansDocs/hardWork.txt practiceContainer:/home/
 #TODO FIRST NOTE TO REDHATTER
-echo "Dear Redhatter, if you're reading this its probably too late.........." > generatedFiles/alansDocs/toRedHatter.txt
+echo "Dear Red Hatter, this is Alan. I dont have much time. Not everything is as it seems. Do not trust Kosmos Galaxy Ballistics. More instructions to follow. ~ Alan" > generatedFiles/alansDocs/toRedHatter.txt
 podman cp  generatedFiles/alansDocs/toRedHatter.txt practiceContainer:/home/
 podman exec -lit mv /home/toRedHatter.txt /home/.toRedHatter.txt
 for FILE in fixLogs.sh makeAccounts.sh doGroups.sh setupOpenshift.sh ansiblejob.sh ammenderrors.sh deleteOldUsers.sh
@@ -43,7 +43,23 @@ podman run -d --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_
 
 ####################################### PART B
 
-oc delete project test-project 
-oc new-project test-project
+oc projects | grep test-project 
+#Project does not exist 
+if [ $? == 1 ]
+then 
+	oc new-project test-project 
+	oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
+#Project exists
+else
+	oc get pods | grep mytest 
+	#App does not exist
+	if (( $? == 1 ))
+	then 
+		oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
+	#App exists 
+	else
+		oc delete all -l app=mytest
+		oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
+	fi 
+fi 
 
-oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment

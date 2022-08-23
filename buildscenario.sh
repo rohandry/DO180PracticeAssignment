@@ -2,6 +2,9 @@
 
 ####################################### PART A 
 
+echo "Cleaning workspace"
+sh cleanup.sh
+
 ###### Create a mess of containers and images
 
 echo "Making folders"
@@ -24,7 +27,6 @@ done
 ##### Create a container with some changes made to it
 echo "Creating changes image and container"
 podman run --name practiceContainer -d docker.io/redhat/ubi8-minimal sleep 10s
-
 echo "Making changes"
 echo "im so friggen board" > generatedFiles/alansDocs/hardWork.txt
 podman cp  generatedFiles/alansDocs/hardWork.txt practiceContainer:/home/

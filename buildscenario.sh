@@ -45,4 +45,4 @@ podman run -d --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_
 
 oc new-project test-project
 
-oc new-app --name mytest --context-dir hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
+oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment

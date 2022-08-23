@@ -28,7 +28,7 @@ podman run --name practiceContainer -d docker.io/redhat/ubi8-minimal sleep 10s
 echo "Making changes"
 echo "im so friggen board" > generatedFiles/alansDocs/hardWork.txt
 podman cp  generatedFiles/alansDocs/hardWork.txt practiceContainer:/home/
-#TODO FIRST NOTE TO REDHATTER
+#FIRST NOTE TO REDHATTER
 echo "Dear Red Hatter, this is Alan. I dont have much time. Not everything is as it seems. Do not trust Kosmos Galaxy Ballistics. More instructions to follow. ~ Alan" > generatedFiles/alansDocs/toRedHatter.txt
 podman cp  generatedFiles/alansDocs/toRedHatter.txt practiceContainer:/home/
 podman exec -lit mv /home/toRedHatter.txt /home/.toRedHatter.txt

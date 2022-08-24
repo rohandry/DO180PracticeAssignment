@@ -50,7 +50,7 @@ oc projects | grep alans
 if [ $? == 1 ]
 then
 	oc new-project alans-secret-project 
-	oc new-app --name mySecretDiary --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
+	oc new-app --name mysecretdiary --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
 	oc new-project alans-test-project 
 	oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
 #Project exists

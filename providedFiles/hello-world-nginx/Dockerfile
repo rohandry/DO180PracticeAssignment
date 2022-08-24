@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8:8.0
 
 RUN yum install -y --disableplugin=subscription-manager --nodocs nginx \
   && yum clean all \
-  && echo ${WHICHINDEX} > /usr/share/nginx/html
+  && echo ${WHICHINDEX} > /usr/share/nginx/html/index.html
 
 #ADD index.html /usr/share/nginx/html
 

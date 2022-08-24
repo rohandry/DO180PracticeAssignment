@@ -65,4 +65,4 @@ else
 		oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
 	fi 
 fi 
-
+oc expose svc mytest

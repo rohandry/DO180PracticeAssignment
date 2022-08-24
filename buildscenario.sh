@@ -45,15 +45,17 @@ podman run -d --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_
 rm -Rf generatedFiles
 ####################################### PART B
 
-oc projects | grep test-project 
+oc projects | grep alans 
 #Project does not exist 
 if [ $? == 1 ]
-then 
-	oc new-project test-project 
+then
+	oc new-project alans-secret-project 
+	oc new-app --name mySecretDiary --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
+	oc new-project alans-test-project 
 	oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
 #Project exists
 else
-	oc project test-project
+	oc project alans-test-project
 	oc get pods | grep mytest 
 	#App does not exist
 	if (( $? == 1 ))

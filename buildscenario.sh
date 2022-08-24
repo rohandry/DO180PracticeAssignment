@@ -42,12 +42,15 @@ done
 ###### Debug a boken container
 echo "Creating broken Container"
 podman run -d --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWRD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -p 30306:3306 docker.io/bitnami/mysql
+
+
+
 ####################################### PART B
 NOTE3='Dear Red Hatter, if you’re reading this its too late for me, they’ve probably told you I "disappeared". I havent managed to complete my work so its up to you to save Canberra.  Doesnt <b>K</b>osmos <b>G</b>alaxy <b>B</b>alistics sound familiar to you? Mark my words, they’re going to ask you to launch the "rocket" so Red Hat will be blamed for all of this. We have one last hope. I managed to create an alternative launch code for the countDown app that will trigger the missile to self-destruct. Please Red Hatter, save us all. The code is 190990. ~ Alan'
 DIARY1='The path is set. Soon our competition will be no more. Thank you Red Hat. Note to self, next diary is hidden in my Containerfile folder.'
 
 #If the secret project doesnt exist create it
-oc projects | grep alans-secret-project
+oc projects | grep -q alans-secret-project
 if [ $? == 1 ]
 then
 	oc new-project alans-secret-project
@@ -55,17 +58,17 @@ then
 	oc expose svc mysecretdiary
 fi
 
-oc projects | grep alans-test-project 
 #Project does not exist so create it
+oc projects | grep -q alans-test-project 
 if [ $? == 1 ]
 then
 	oc new-project alans-test-project 
-#Project exists so delete existing apps
 else
+#Project exists so delete existing apps
 	oc project alans-test-project
         for APP in mytest buildapp htmlhelloworld yuricontainer containerbuild mariadbpersistent mytemplate
 	do
-		oc get pods | grep $APP
+		oc status | grep -q $APP
 		if (( $? == 0 ))
 		then
 			oc delete all -l app=${APP}

@@ -42,29 +42,25 @@ done
 ###### Debug a boken container
 echo "Creating broken Container"
 podman run -d --name mysql -e MYSQL_DATABASE=items -e MYSQL_USER=user1 -e MYSQL_PASSWRD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -p 30306:3306 docker.io/bitnami/mysql
-rm -Rf generatedFiles
 ####################################### PART B
-
+NOTE3='Dear Red Hatter, if you’re reading this its too late for me, they’ve probably told you I "disappeared". I havent managed to complete my work so its up to you to save Canberra.  Doesnt <b>K</b>osmos <b>G</b>alaxy <b>B</b>alistics sound familiar to you? Mark my words, they’re going to ask you to launch the "rocket" so Red Hat will be blamed for all of this. We have one last hope. I managed to create an alternative launch code for the countDown app that will trigger the missile to self-destruct. Please Red Hatter, save us all. The code is 190990. ~ Alan'
+DIARY1='The path is set. Soon our competition will be no more. Thank you Red Hat. Note to self, next diary is hidden in my Containerfile folder.'
 oc projects | grep alans 
 #Project does not exist 
 if [ $? == 1 ]
 then
 	oc new-project alans-secret-project 
-	oc new-app --name mysecretdiary --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
+	oc new-app --name mysecretdiary --context-dir providedFiles/hello-world-nginx --build-env WHICHINDEX=${DIARY1} --strategy docker https://github.com/rohandry/myDO180Assignment
+	oc expose svc/mysecretdiary
 	oc new-project alans-test-project 
-	oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
 #Project exists
 else
 	oc project alans-test-project
-	oc get pods | grep mytest 
-	#App does not exist
-	if (( $? == 1 ))
-	then 
-		oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
-	#App exists 
-	else
-		oc delete all -l app=mytest
-		oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --strategy docker https://github.com/rohandry/myDO180Assignment
-	fi 
-fi 
-oc expose svc mytest
+        for APP in mytest buildapp htmlhelloworld yuricontainer containerbuild mariadbpersistent mytemplate
+	do 
+		oc delete all -l app=${APP}
+	done
+fi
+oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --build-env WHICHINDEX=${NOTE3} --strategy docker https://github.com/rohandry/myDO180Assignment
+oc expose svc/mytest
+rm -Rf generatedFiles

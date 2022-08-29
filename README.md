@@ -2,7 +2,7 @@
 
 - To begin the assignment please follow the instructions in AssignmentBrief.pdf
 
-- This course requires access to an openshift cluster 
+- This assignment requires access to an openshift cluster 
 
 - For any requests, questions, feedback, or issues, please reach out to me at rohan@redhat.com
 

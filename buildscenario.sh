@@ -55,7 +55,7 @@ oc projects | grep -q ${USER}-alans-secret-project
 if [ $? == 1 ]
 then
 	oc new-project ${USER}-alans-secret-project
-        oc new-app --name mysecretdiary --context-dir providedFiles/hello-world-nginx --build-env WHICHINDEX="${DIARY1}" --strategy docker https://github.com/rohandry/myDO180Assignment
+        oc new-app --name mysecretdiary --context-dir providedFiles/hello-world-nginx --build-env WHICHINDEX="${DIARY1}" --strategy docker https://github.com/rohandry/DO180PracticeAssignment
 	oc expose svc mysecretdiary
 fi
 
@@ -76,6 +76,6 @@ else
 		fi
 	done
 fi
-oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --build-env WHICHINDEX="${NOTE3}" --strategy docker https://github.com/rohandry/myDO180Assignment
+oc new-app --name mytest --context-dir providedFiles/hello-world-nginx --build-env WHICHINDEX="${NOTE3}" --strategy docker https://github.com/rohandry/DO180PracticeAssignment
 oc expose svc/mytest
 rm -Rf generatedFiles

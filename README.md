@@ -6,8 +6,9 @@
 
 - For any requests, questions, feedback, or issues, please reach out to me at rohan@redhat.com
 
-- I have not yet created a 'solutions' sheet for this excercise but may in the future if requested 
+- I have not yet created a 'solutions' sheet for this exercise but may in the future if requested 
 
 - Thanks, I hope you enjoy :)
 
 Rohan 
+
